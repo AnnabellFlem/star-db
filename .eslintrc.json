@@ -1,0 +1,54 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "standard",
+    "plugin:promise/recommended",
+    "prettier",
+    "plugin:prettier/recommended"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "plugins": [
+    "react",
+    "promise"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "rules": {
+    "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always" }],
+    "react/display-name": "off",
+    "react/jsx-curly-spacing": ["off"],
+    "promise/no-promise-in-callback": "off",
+    "max-len": ["error",
+      {
+        "code": 80,
+        "ignoreTemplateLiterals": true,
+        "ignoreStrings": true
+      }]
+  },
+  "overrides": [
+    {
+      "files": ["**/*.js"],
+      "rules": {
+        "react/prop-types": "off"
+      }
+    }
+  ],
+  "settings": {
+    "react": {
+      "version": "latest"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "plugins": ["stylelint-prettier", "stylelint-order"],
+  "extends": ["stylelint-config-airbnb",
+    "stylelint-config-rational-order",
+    "stylelint-prettier/recommended"],
+  "rules": {
+    "prettier/prettier": true,
+    "order/properties-order": [
+      "width",
+      "height"
+    ],
+    "plugin/rational-order": [true, {
+      "border-in-box-model": false,
+      "empty-line-between-groups": false
+    }]
+  }
+}
