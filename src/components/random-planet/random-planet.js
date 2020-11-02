@@ -57,9 +57,6 @@ export default RandomPlanet
 
 const PlanetView = ({ planet }) => {
   const { id, name, population, rotationPeriod, diameter } = planet
-  // const { src } = useImage({
-  //   srcList: `https://starwars-visualguide.com/assets/img/planets/${id}.jpg`,
-  // })
 
   return (
     <>
