@@ -1,18 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import ErrorButton from '../error-button/error-button'
 import ImgFallback from 'react-image-fallback'
 import './item-details.css'
-
-const Record = ({ item, field, label }) => {
-  return (
-    <li className="list-group-item">
-      <span className="term">{label}</span>
-      <span>{item[field]}</span>
-    </li>
-  )
-}
-
-export { Record }
 
 const ItemDetails = ({ itemId, getData, getImageUrl, children }) => {
   const [item, setItem] = useState(null)
@@ -63,7 +51,6 @@ const ItemDetails = ({ itemId, getData, getImageUrl, children }) => {
                 return React.cloneElement(child, { item })
               })}
             </ul>
-            <ErrorButton />
           </div>
         </div>
       )}

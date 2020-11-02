@@ -31,22 +31,8 @@ export default class SwapiService {
     return this._transformPlanet(planet)
   }
 
-  getAllStarships = async () => {
-    const res = await this.getResource(`/starships/`)
-    return res.results.map(this._transformStarship).slice(0, 5)
-  }
-
-  getStarship = async id => {
-    const starship = await this.getResource(`/starships/${id}/`)
-    return this._transformStarship(starship)
-  }
-
   getPersonImage = ({ id }) => {
     return `${this._imageBase}/characters/${id}.jpg`
-  }
-
-  getStarshipImage = ({ id }) => {
-    return `${this._imageBase}/starships/${id}.jpg`
   }
 
   getPlanetImage = ({ id }) => {
@@ -66,20 +52,6 @@ export default class SwapiService {
       rotationPeriod: planet.rotation_period,
       diameter: planet.diameter,
       residents: planet.residents,
-    }
-  }
-
-  _transformStarship = starship => {
-    return {
-      id: this._extractId(starship),
-      name: starship.name,
-      model: starship.model,
-      manufacturer: starship.manufacturer,
-      costInCredits: starship.cost_in_credits,
-      length: starship.length,
-      crew: starship.crew,
-      passengers: starship.passengers,
-      cargoCapacity: starship.cargo_capacity,
     }
   }
 

@@ -1,5 +1,6 @@
 import React from 'react'
-import ItemDetails, { Record } from '../item-details'
+import ItemDetails from '../item-details'
+import Record from '../record'
 import { withSwapiService } from '../hoc-helpers'
 
 const PlanetDetails = props => {
@@ -8,6 +9,7 @@ const PlanetDetails = props => {
       <Record field="population" label="Population" />
       <Record field="rotationPeriod" label="Rotation Period" />
       <Record field="diameter" label="Diameter" />
+      <Record field="residents" label="Residents" />
     </ItemDetails>
   )
 }

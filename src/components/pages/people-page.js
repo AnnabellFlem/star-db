@@ -1,22 +1,18 @@
 import React from 'react'
-import { withRouter, useHistory, useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { PersonDetails, PersonList } from '../sw-components'
 import Row from '../row'
 
 const PeoplePage = () => {
-  const history = useHistory()
   const { id } = useParams()
-
-  const handleClick = id => {
-    history.push(id)
-  }
+  const history = useHistory()
 
   return (
     <Row
-      left={<PersonList onItemSelected={handleClick(id)} />}
+      left={<PersonList onItemSelected={id => history.push(id)} />}
       right={<PersonDetails itemId={id} />}
     />
   )
 }
 
-export default withRouter(PeoplePage)
+export default PeoplePage
