@@ -1,83 +1,74 @@
-import React, { Component } from 'react';
-
-import ErrorButton from '../error-button/error-button';
-
-import './item-details.css';
+import React, { useEffect, useState } from 'react'
+import ErrorButton from '../error-button/error-button'
+import ImgFallback from 'react-image-fallback'
+import './item-details.css'
 
 const Record = ({ item, field, label }) => {
   return (
     <li className="list-group-item">
       <span className="term">{label}</span>
-      <span>{ item[field] }</span>
+      <span>{item[field]}</span>
     </li>
-  );
-};
+  )
+}
 
-export {
-  Record
-};
+export { Record }
 
-export default class ItemDetails extends Component {
+const ItemDetails = ({ itemId, getData, getImageUrl, children }) => {
+  const [item, setItem] = useState(null)
+  const [image, setImage] = useState(null)
 
-  state = {
-    item: null,
-    image: null
-  };
+  useEffect(() => {
+    updateItem()
+  }, [itemId, getData, getImageUrl])
 
-  componentDidMount() {
-    this.updateItem();
+  const onError = () => {
+    console.log('error')
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.itemId !== prevProps.itemId ||
-      this.props.getData !== prevProps.getData ||
-      this.props.getImageUrl !== prevProps.getImageUrl) {
-      this.updateItem();
-    }
-  }
-
-  updateItem() {
-    const { itemId, getData, getImageUrl } = this.props;
+  const updateItem = () => {
     if (!itemId) {
-      return;
+      return
     }
 
     getData(itemId)
-      .then((item) => {
-        this.setState({
-          item,
-          image: getImageUrl(item)
-        });
-      });
+      .then(item => {
+        setItem(item)
+        return setImage(getImageUrl(item))
+      })
+      .catch(onError)
   }
 
-  render() {
-
-    const { item, image } = this.state;
-    if (!item) {
-      return <span>Select a item from a list</span>;
-    }
-
-    const { name } = item;
-
-    return (
-      <div className="item-details card">
-        <img className="item-image"
-          src={image}
-          alt="item"/>
-
-        <div className="card-body">
-          <h4>{name}</h4>
-          <ul className="list-group list-group-flush">
-            {
-              React.Children.map(this.props.children, (child) => {
-                return React.cloneElement(child, { item });
-              })
+  return (
+    <>
+      {!item ? (
+        <span>Select a item from a list</span>
+      ) : (
+        <div className="item-details card">
+          <ImgFallback
+            className="item-image"
+            src={image}
+            fallbackImage={
+              'https://starwars-visualguide.com/assets/img/big-placeholder.jpg'
             }
-          </ul>
-          <ErrorButton />
+            alt="item"
+            width={124}
+            height={124}
+          />
+
+          <div className="card-body">
+            <h4>{item?.name}</h4>
+            <ul className="list-group list-group-flush">
+              {React.Children.map(children, child => {
+                return React.cloneElement(child, { item })
+              })}
+            </ul>
+            <ErrorButton />
+          </div>
         </div>
-      </div>
-    );
-  }
+      )}
+    </>
+  )
 }
+
+export default ItemDetails

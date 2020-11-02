@@ -6,9 +6,10 @@
 }
 
 .item-details .item-image {
-  width: 30%;
-  height: 30%;
+  width: 124px;
+  height: 124px;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 .item-details .list-group-item {

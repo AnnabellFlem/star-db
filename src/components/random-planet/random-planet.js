@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Img } from 'react-image'
-import PropTypes from 'prop-types'
-
+import ImgFallback from 'react-image-fallback'
 import Spinner from '../spinner'
 import ErrorIndicator from '../error-indicator'
 import SwapiService from '../../services/swapi-service'
@@ -59,16 +57,21 @@ export default RandomPlanet
 
 const PlanetView = ({ planet }) => {
   const { id, name, population, rotationPeriod, diameter } = planet
+  // const { src } = useImage({
+  //   srcList: `https://starwars-visualguide.com/assets/img/planets/${id}.jpg`,
+  // })
 
   return (
     <>
-      <Img
+      <ImgFallback
         className="planet-image"
-        src={[
-          `https://starwars-visualguide.com/assets/img/planets/${id}.jpg`,
-          'https://starwars-visualguide.com/assets/img/big-placeholder.jpg',
-        ]}
+        src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
+        fallbackImage={
+          'https://starwars-visualguide.com/assets/img/big-placeholder.jpg'
+        }
         alt="planet"
+        width={150}
+        height={150}
       />
       <div>
         <h4>{name}</h4>
