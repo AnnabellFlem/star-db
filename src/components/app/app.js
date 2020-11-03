@@ -19,12 +19,10 @@ const App = () => {
   const [apiService, setApiService] = useState(swapiService) // dummyService fix
 
   useEffect(() => {
-    console.log(
-      swapiService
-        .getAllPlanets()
-        .then(() => setApiService(swapiService))
-        .catch(() => setApiService(dummyService)),
-    )
+    swapiService
+      .getAllPlanets()
+      .then(() => setApiService(swapiService))
+      .catch(() => setApiService(dummyService))
   }, [])
 
   return (
