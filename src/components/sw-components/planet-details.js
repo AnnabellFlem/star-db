@@ -9,6 +9,9 @@ const PlanetDetails = props => {
       <Record field="population" label="Population" />
       <Record field="rotationPeriod" label="Rotation Period" />
       <Record field="diameter" label="Diameter" />
+      <Record field="climate" label="Climate" />
+      <Record field="gravity" label="Gravity" />
+      <Record field="terrain" label="Terrain" />
       <Record field="residents" label="Residents" />
     </ItemDetails>
   )

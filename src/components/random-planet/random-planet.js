@@ -56,7 +56,7 @@ const RandomPlanet = ({ updateInterval = 10000 }) => {
 export default RandomPlanet
 
 const PlanetView = ({ planet }) => {
-  const { id, name, population, rotationPeriod, diameter } = planet
+  const { id, name, population, climate } = planet
 
   return (
     <>
@@ -79,11 +79,7 @@ const PlanetView = ({ planet }) => {
           </li>
           <li className="list-group-item">
             <span className="term">Rotation Period</span>
-            <span>{rotationPeriod}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Diameter</span>
-            <span>{diameter}</span>
+            <span>{climate}</span>
           </li>
         </ul>
       </div>

@@ -9,11 +9,17 @@ import {
 
 const renderName = ({ name }) => <span>{name}</span>
 
-const renderModelAndName = ({ model, name }) => (
-  <span>
-    {name} ({model})
-  </span>
-)
+const renderPlanetName = ({ name, population, climate }) => {
+  return (
+    <>
+      <h4>{name}</h4>
+      <ul>
+        <li>population: {population}</li>
+        <li>climate: {climate}</li>
+      </ul>
+    </>
+  )
+}
 
 const mapPersonMethodsToProps = swapiService => {
   return {
@@ -27,12 +33,6 @@ const mapPlanetMethodsToProps = swapiService => {
   }
 }
 
-const mapStarshipMethodsToProps = swapiService => {
-  return {
-    getData: swapiService.getAllStarships,
-  }
-}
-
 const PersonList = compose(
   withSwapiService(mapPersonMethodsToProps),
   withData,
@@ -42,13 +42,7 @@ const PersonList = compose(
 const PlanetList = compose(
   withSwapiService(mapPlanetMethodsToProps),
   withData,
-  withChildFunction(renderName),
+  withChildFunction(renderPlanetName),
 )(ItemList)
 
-const StarshipList = compose(
-  withSwapiService(mapStarshipMethodsToProps),
-  withData,
-  withChildFunction(renderModelAndName),
-)(ItemList)
-
-export { PersonList, PlanetList, StarshipList }
+export { PersonList, PlanetList }

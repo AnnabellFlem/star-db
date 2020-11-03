@@ -48,9 +48,12 @@ export default class SwapiService {
     return {
       id: this._extractId(planet),
       name: planet.name,
+      climate: planet.climate,
       population: planet.population,
       rotationPeriod: planet.rotation_period,
       diameter: planet.diameter,
+      gravity: planet.gravity,
+      terrain: planet.terrain,
       residents: planet.residents,
     }
   }
