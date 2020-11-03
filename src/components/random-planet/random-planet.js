@@ -78,7 +78,7 @@ const PlanetView = ({ planet }) => {
             <span>{population}</span>
           </li>
           <li className="list-group-item">
-            <span className="term">Rotation Period</span>
+            <span className="term">Climate</span>
             <span>{climate}</span>
           </li>
         </ul>

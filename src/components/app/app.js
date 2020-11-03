@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Header from '../header'
 import RandomPlanet from '../random-planet'
-import ErrorBoundry from '../error-boundry'
 import SwapiService from '../../services/swapi-service'
-import DummySwapiService from '../../services/dummy-swapi-service'
+import DummySwapiService from "../../services/dummy-swapi-service";
 
 import { PeoplePage, PlanetsPage } from '../pages'
 
@@ -15,39 +14,40 @@ import './app.css'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 const App = () => {
-  const [swapiService, setSwapiService] = useState(new SwapiService())
+  const swapiService = new SwapiService()
+  const dummyService = new DummySwapiService()
+  const [apiService, setApiService] = useState(swapiService) // dummyService fix
 
-  const onServiceChange = () => {
-    setSwapiService(() => {
-      const Service =
-        swapiService instanceof SwapiService ? DummySwapiService : SwapiService
-      return new Service()
-    })
-  }
+  useEffect(() => {
+    console.log(
+      swapiService
+        .getAllPlanets()
+        .then(() => setApiService(swapiService))
+        .catch(() => setApiService(dummyService)),
+    )
+  }, [])
 
   return (
-    <ErrorBoundry>
-      <SwapiServiceProvider value={swapiService}>
-        <Router>
-          <div className="stardb-app">
-            <Header onServiceChange={onServiceChange} />
-            <RandomPlanet />
+    <SwapiServiceProvider value={apiService}>
+      <Router>
+        <div className="stardb-app">
+          <Header />
+          <RandomPlanet />
 
-            <Switch>
-              <Route path="/" exact>
-                <h2>Welcome to StarDB</h2>
-              </Route>
-              <Route path="/people/:id?" component={PeoplePage} />
-              <Route path="/planets" component={PlanetsPage} />
+          <Switch>
+            <Route path="/" exact>
+              <h2>Welcome to StarDB</h2>
+            </Route>
+            <Route path="/people/:id?" component={PeoplePage} />
+            <Route path="/planets" component={PlanetsPage} />
 
-              <Route>
-                <h2>Page not found</h2>
-              </Route>
-            </Switch>
-          </div>
-        </Router>
-      </SwapiServiceProvider>
-    </ErrorBoundry>
+            <Route>
+              <h2>Page not found</h2>
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </SwapiServiceProvider>
   )
 }
 

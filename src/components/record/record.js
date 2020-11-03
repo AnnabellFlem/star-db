@@ -21,7 +21,7 @@ const Record = ({ item, field, label }) => {
   const handleField = () => {
     if (isResident) {
       const residents = item[field]
-      return residents.length ? (
+      return residents && residents.length ? (
         <ul>
           {currentPerson.map(resident => {
             return (
@@ -43,15 +43,17 @@ const Record = ({ item, field, label }) => {
     if (isResident) {
       const residents = item[field]
 
-      residents.map(item => {
-        const id = findPerson(item)
-        return swapiService
-          .getPerson(id)
-          .then(data =>
-            setCurrentPerson(item => [...item, { id: id, name: data.name }]),
-          )
-          .catch(data => onError(data))
-      })
+      residents &&
+        residents.length &&
+        residents.map(item => {
+          const id = findPerson(item)
+          return swapiService
+            .getPerson(id)
+            .then(data =>
+              setCurrentPerson(item => [...item, { id: id, name: data.name }]),
+            )
+            .catch(data => onError(data))
+        })
     }
     setCurrentPerson([])
   }, [item[field]])
