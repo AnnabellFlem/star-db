@@ -1,0 +1,8 @@
+.button-wrapper {
+    width: 80vw;
+    margin-bottom: 2rem;
+}
+
+.button-wrapper button+button {
+    margin-left: 2rem;
+}

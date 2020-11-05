@@ -9,7 +9,7 @@ import {
 
 const renderName = ({ name }) => <span>{name}</span>
 
-const renderPlanetName = ({ name, population, climate }) => {
+const renderPlanetInfo = ({ name, population, climate }) => {
   return (
     <>
       <h4>{name}</h4>
@@ -42,7 +42,7 @@ const PersonList = compose(
 const PlanetList = compose(
   withSwapiService(mapPlanetMethodsToProps),
   withData,
-  withChildFunction(renderPlanetName),
+  withChildFunction(renderPlanetInfo),
 )(ItemList)
 
 export { PersonList, PlanetList }

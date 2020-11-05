@@ -16,7 +16,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 const App = () => {
   const swapiService = new SwapiService()
   const dummyService = new DummySwapiService()
-  const [apiService, setApiService] = useState(swapiService) // dummyService fix
+  const [apiService, setApiService] = useState(dummyService) // dummyService fix
 
   useEffect(() => {
     swapiService

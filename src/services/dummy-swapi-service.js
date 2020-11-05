@@ -9,15 +9,23 @@ export default class DummySwapiService {
     },
   ]
 
-  _planets = [
-    {
-      id: 1,
-      name: 'NO_DATA',
-      population: 'NO_DATA',
-      rotationPeriod: 'NO_DATA',
-      diameter: 'NO_DATA',
-    },
-  ]
+  _planets = {
+    planets: [
+      {
+        id: 1,
+        name: 'NO_DATA',
+        population: 'NO_DATA',
+        rotationPeriod: 'NO_DATA',
+        diameter: 'NO_DATA',
+        climate: 'NO_DATA',
+        gravity: 'NO_DATA',
+        terrain: 'NO_DATA',
+        residents: 'NO_DATA',
+      },
+    ],
+    next: null,
+    prev: null,
+  }
 
   getAllPeople = async () => {
     return this._people

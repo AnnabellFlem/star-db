@@ -8,7 +8,7 @@ const ItemList = ({
   onItemSelected = () => {},
   children: renderLabel,
 }) => {
-  const items = data?.map(item => {
+  const items = data?.items?.map(item => {
     const { id } = item
     const label = renderLabel(item)
 
