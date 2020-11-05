@@ -25,7 +25,7 @@ export default class SwapiService {
     const res = await this.getResource(`/planets/?page=${id}`)
     return {
       items: res.results.map(this._transformPlanet),
-      nextPage: res.next,
+      next: res.next,
       previous: res.previous,
     }
   }

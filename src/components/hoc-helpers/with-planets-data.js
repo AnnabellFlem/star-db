@@ -3,15 +3,14 @@ import Spinner from '../spinner'
 import ErrorIndicator from '../error-indicator'
 
 const withPlanetsData = View => props => {
-  const { currentPage } = props
+  const { currentPage, handleNextButtonData } = props
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
   useEffect(() => {
-    console.log(data)
     update()
-  }, [])
+  }, [currentPage])
 
   const update = () => {
     setLoading(true)
@@ -21,15 +20,14 @@ const withPlanetsData = View => props => {
       .getData(currentPage)
       .then(data => {
         setLoading(false)
-        return setData(data.items)
+        handleNextButtonData(data.next)
+        return setData(data)
       })
       .catch(() => {
         setLoading(false)
         setError(true)
       })
   }
-
-  // const newData = useMemo(() => update(), [currentPage])
 
   const renderComponent = () => {
     if (loading) {
