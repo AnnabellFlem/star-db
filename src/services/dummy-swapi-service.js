@@ -10,7 +10,7 @@ export default class DummySwapiService {
   ]
 
   _planets = {
-    planets: [
+    items: [
       {
         id: 1,
         name: 'NO_DATA',

@@ -5,6 +5,7 @@ import {
   withSwapiService,
   withChildFunction,
   compose,
+  withPlanetsData,
 } from '../hoc-helpers'
 
 const renderName = ({ name }) => <span>{name}</span>
@@ -41,7 +42,7 @@ const PersonList = compose(
 
 const PlanetList = compose(
   withSwapiService(mapPlanetMethodsToProps),
-  withData,
+  withPlanetsData,
   withChildFunction(renderPlanetInfo),
 )(ItemList)
 

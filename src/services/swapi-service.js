@@ -22,7 +22,7 @@ export default class SwapiService {
   }
 
   getAllPlanets = async (id = 1) => {
-    const res = await this.getResource(`/planetsss/?page=${id}`)
+    const res = await this.getResource(`/planets/?page=${id}`)
     return {
       items: res.results.map(this._transformPlanet),
       nextPage: res.next,
