@@ -10,14 +10,14 @@ import { SwapiServiceProvider } from '../swapi-service-context'
 
 import './app.css'
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as HashRouter, Switch, Route } from 'react-router-dom'
 
 const App = () => {
   const swapiService = new SwapiService()
 
   return (
     <SwapiServiceProvider value={swapiService}>
-      <Router basename={process.env.PUBLIC_URL + '/'}>
+      <HashRouter basename={process.env.PUBLIC_URL}>
         <div className="stardb-app">
           <Header />
           <RandomPlanet />
@@ -34,7 +34,7 @@ const App = () => {
             </Route>
           </Switch>
         </div>
-      </Router>
+      </HashRouter>
     </SwapiServiceProvider>
   )
 }
