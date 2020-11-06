@@ -6,10 +6,10 @@ Written using **React** and **React Router**.
 To get info about Star Wars universe in JSON format was used [Star Wars API](https://swapi.dev/) 
 
 Application has the following features: 
+- Ability to view a random planet which changes every 10 seconds.
 - Ability to see a list of planets with brief information.
 - Ability to get data about the planet with the list of residents.
 - Ability to switch to a resident and read information about him.
-- Ability to view a random planet.
 
 #### Future Improvements
 
