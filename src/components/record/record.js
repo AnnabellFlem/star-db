@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import SwapiService from '../../services/swapi-service'
 import { Link } from 'react-router-dom'
 
@@ -17,6 +17,29 @@ const Record = ({ item, field, label }) => {
   const onError = err => {
     console.log(err)
   }
+
+  const update = useCallback(() => {
+    if (isResident) {
+      const residents = item[field]
+
+      residents &&
+        residents.length &&
+        residents.map(item => {
+          const id = findPerson(item)
+          return swapiService
+            .getPerson(id)
+            .then(data =>
+              setCurrentPerson(item => [...item, { id: id, name: data.name }]),
+            )
+            .catch(data => onError(data))
+        })
+    }
+    setCurrentPerson([])
+  }, [])
+
+  useEffect(() => {
+    update()
+  }, [update])
 
   const handleField = () => {
     if (isResident) {
@@ -38,25 +61,6 @@ const Record = ({ item, field, label }) => {
       return <span>{item[field]}</span>
     }
   }
-
-  useEffect(() => {
-    if (isResident) {
-      const residents = item[field]
-
-      residents &&
-        residents.length &&
-        residents.map(item => {
-          const id = findPerson(item)
-          return swapiService
-            .getPerson(id)
-            .then(data =>
-              setCurrentPerson(item => [...item, { id: id, name: data.name }]),
-            )
-            .catch(data => onError(data))
-        })
-    }
-    setCurrentPerson([])
-  }, [item, field])
 
   return (
     <li className="list-group-item">

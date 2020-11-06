@@ -10,16 +10,17 @@ const RandomPlanet = ({ updateInterval = 10000 }) => {
   const swapiService = new SwapiService()
 
   const [planet, setPlanet] = useState({})
+  const [service] = useState(swapiService)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
   const updatePlanet = useCallback(() => {
     const id = Math.floor(Math.random() * 17) + 2
-    swapiService
+    service
       .getPlanet(id)
       .then(data => onPlanetLoaded(data))
       .catch(onError)
-  }, [])
+  }, [service])
 
   useEffect(() => {
     updatePlanet()

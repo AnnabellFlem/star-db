@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import ImgFallback from 'react-image-fallback'
 import './item-details.css'
 
@@ -6,15 +6,11 @@ const ItemDetails = ({ itemId, getData, getImageUrl, children }) => {
   const [item, setItem] = useState(null)
   const [image, setImage] = useState(null)
 
-  useEffect(() => {
-    updateItem()
-  }, [itemId, getData, getImageUrl])
-
   const onError = () => {
     console.log('error')
   }
 
-  const updateItem = () => {
+  const updateItem = useCallback(() => {
     if (!itemId) {
       return
     }
@@ -25,7 +21,11 @@ const ItemDetails = ({ itemId, getData, getImageUrl, children }) => {
         return setImage(getImageUrl(item))
       })
       .catch(onError)
-  }
+  }, [itemId, getImageUrl, getData])
+
+  useEffect(() => {
+    updateItem()
+  }, [updateItem])
 
   return (
     <>

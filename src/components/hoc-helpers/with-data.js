@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Spinner from '../spinner'
 import ErrorIndicator from '../error-indicator'
 
@@ -7,11 +7,7 @@ const withData = View => props => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
-  useEffect(() => {
-    update()
-  }, [])
-
-  const update = () => {
+  const update = useCallback(() => {
     setLoading(true)
     setError(false)
 
@@ -25,7 +21,11 @@ const withData = View => props => {
         setLoading(false)
         setError(true)
       })
-  }
+  }, [props])
+
+  useEffect(() => {
+    update()
+  }, [update])
 
   const renderComponent = () => {
     if (loading) {

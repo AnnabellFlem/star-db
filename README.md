@@ -1,7 +1,7 @@
 # About project
-This project was created for educational purposes. 
+This project was created for educational purposes. It contains information on the Star Wars universe. 
 
-Written using **React**.
+Written using **React** and **React Router**.
 
 To get info about Star Wars universe in JSON format was used [Star Wars API](https://swapi.dev/) 
 
