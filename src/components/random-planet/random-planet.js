@@ -25,7 +25,6 @@ const RandomPlanet = ({ updateInterval = 10000 }) => {
   useEffect(() => {
     updatePlanet()
     const interval = setInterval(() => updatePlanet(), updateInterval)
-    console.log(1111)
     return () => clearInterval(interval)
   }, [updatePlanet])
 
