@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <SwapiServiceProvider value={swapiService}>
-      <Router>
+      <Router basename="/star-db">
         <div className="stardb-app">
           <Header />
           <RandomPlanet />
