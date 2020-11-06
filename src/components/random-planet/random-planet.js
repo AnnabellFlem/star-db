@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import ImgFallback from 'react-image-fallback'
 import Spinner from '../spinner'
 import ErrorIndicator from '../error-indicator'
@@ -13,11 +13,20 @@ const RandomPlanet = ({ updateInterval = 10000 }) => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
+  const updatePlanet = useCallback(() => {
+    const id = Math.floor(Math.random() * 17) + 2
+    swapiService
+      .getPlanet(id)
+      .then(data => onPlanetLoaded(data))
+      .catch(onError)
+  }, [])
+
   useEffect(() => {
     updatePlanet()
     const interval = setInterval(() => updatePlanet(), updateInterval)
+    console.log(1111)
     return () => clearInterval(interval)
-  }, [])
+  }, [updatePlanet])
 
   const onPlanetLoaded = planet => {
     setPlanet(planet)
@@ -28,14 +37,6 @@ const RandomPlanet = ({ updateInterval = 10000 }) => {
   const onError = () => {
     setLoading(false)
     setError(true)
-  }
-
-  const updatePlanet = () => {
-    const id = Math.floor(Math.random() * 17) + 2
-    swapiService
-      .getPlanet(id)
-      .then(data => onPlanetLoaded(data))
-      .catch(onError)
   }
 
   const hasData = !(loading || error)

@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <SwapiServiceProvider value={swapiService}>
-      <Router basename="/star-db">
+      <Router basename={process.env.PUBLIC_URL + '/'}>
         <div className="stardb-app">
           <Header />
           <RandomPlanet />

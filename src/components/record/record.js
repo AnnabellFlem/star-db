@@ -56,7 +56,7 @@ const Record = ({ item, field, label }) => {
         })
     }
     setCurrentPerson([])
-  }, [item[field]])
+  }, [item, field])
 
   return (
     <li className="list-group-item">

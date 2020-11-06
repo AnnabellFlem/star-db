@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Spinner from '../spinner'
 import ErrorIndicator from '../error-indicator'
 
@@ -8,11 +8,7 @@ const withPlanetsData = View => props => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
-  useEffect(() => {
-    update()
-  }, [currentPage])
-
-  const update = () => {
+  const update = useCallback(() => {
     setLoading(true)
     setError(false)
 
@@ -27,7 +23,11 @@ const withPlanetsData = View => props => {
         setLoading(false)
         setError(true)
       })
-  }
+  }, [currentPage, handleNextButtonData, props])
+
+  useEffect(() => {
+    update()
+  }, [update])
 
   const renderComponent = () => {
     if (loading) {
